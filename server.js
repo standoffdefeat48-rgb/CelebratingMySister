@@ -36,8 +36,8 @@ function saveWish(wish) {
 }
 
 // API эндпоинты
-app.get('/api/wishes', (req, res) => {
-    res.json({ success: true, data: getWishes() });
+app.use((req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.post('/api/wishes', (req, res) => {
