@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С 20-летием, моя тигрица! 🐅🔥</title>
+    
+    <!-- Подключаем дорогие шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    
+    <!-- Библиотеки: Конфетти и 3D-наклоны -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+
+    <style>
+        /* Анимированный фон (Миллиардный уровень) */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes glowLine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+            /* Премиальный переливающийся темный фон */
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #0f0c29);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+        }
+
+        /* 3D Контейнер */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            margin: 30px auto;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transform-style: preserve-3d; /* Для 3D эффекта */
+        }
+
+        /* Светящийся текст заголовка */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: transparent;
+            background: linear-gradient(90deg, #ffafbd, #ffc3a0, #ffafbd);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            animation: glowLine 4s linear infinite;
+            margin-bottom: 10px;
+            font-size: 3.2rem;
+            transform: translateZ(50px); /* Выдвигаем текст в 3D */
+        }
+
+        .subtitle {
+            color: #b8b5ff;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transform: translateZ(40px);
+        }
+
+        /* Плеер */
+        .music-player {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(255, 107, 129, 0.2);
+            transform: translateZ(30px);
+        }
+        .music-player button {
+            background: linear-gradient(135deg, #ff6b81, #ff4757);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 800;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+        }
+        .music-player button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 25px rgba(255, 71, 87, 0.6);
+        }
+
+        /* Таймер */
+        .timer {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 40px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            padding: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transform: translateZ(30px);
+        }
+        .timer span { color: #ffafbd; font-weight: 800; }
+
+        /* Открытка с градиентной рамкой */
+        .congrats-card {
+            position: relative;
+            background: #1a1a24;
+            color: #e0e0e0;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: left;
+            margin-bottom: 40px;
+            line-height: 1.9;
+            transform: translateZ(60px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .congrats-card::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #ff6b81, #ffc3a0, #b8b5ff, #ff6b81);
+            background-size: 400%;
+            z-index: -1;
+            border-radius: 22px;
+            animation: gradientBG 10s ease infinite;
+        }
+
+        .congrats-card h3 {
+            color: #ffafbd;
+            font-size: 2.2rem;
+            margin-top: 0;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .highlight-action {
+            background: rgba(255, 107, 129, 0.1);
+            border-left: 4px solid #ff6b81;
+            padding: 20px;
+            margin: 30px 0;
+            font-weight: 600;
+            color: #ffafbd;
+            border-radius: 0 10px 10px 0;
+            font-size: 1.2rem;
+            text-align: center;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Инновационная кнопка подарка (Hold to open) */
+        .gift-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .hold-btn {
+            background: transparent;
+            color: #ff6b81;
+            border: 2px solid #ff6b81;
+            padding: 16px 35px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .hold-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            width: 0%;
+            background: #ff6b81;
+            z-index: -1;
+            transition: width 0.1s linear;
+        }
+        .hold-btn.active::before {
+            width: 100%;
+            transition: width 1.5s ease-in-out; /* Время удержания */
+        }
+        .hold-btn.active {
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 107, 129, 0.8);
+        }
+
+        .gift-response {
+            display: none;
+            margin-top: 25px;
+            color: #fff;
+            font-size: 1.3rem;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Форма */
+        .form-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transform: translateZ(40px);
+        }
+        .form-box input, .form-box textarea {
+            width: 100%;
+            padding: 16px;
+            margin: 10px 0 25px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .form-box input:focus, .form-box textarea:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffafbd;
+            box-shadow: 0 0 15px rgba(255, 175, 189, 0.3);
+        }
+        .form-box button[type="submit"] {
+            background: linear-gradient(90deg, #ffafbd, #ffc3a0);
+            color: #000;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 1.1rem;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .form-box button[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 175, 189, 0.4);
+        }
+
+        /* Стена пожеланий */
+        .wish-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #ffafbd;
+            padding: 18px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+        .wish-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+        .wish-item b { color: #ffafbd; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Инициализация 3D карточки -->
+    <div class="container" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2">
+        
+        <h1 id="typewriter"></h1>
+        <p class="subtitle">Уровень: Миллиард. Создано с душой ✨</p>
+        
+        <!-- Плеер -->
+        <div class="music-player">
+            <span>🎵 Праздничный саундтрек</span>
+            <button id="playMusicBtn" onclick="toggleMusic()">PLAY ▶</button>
+        </div>
+        
+        <audio id="bgMusic" loop>
+            <source src="https://cdnjs.cloudflare.com/ajax/libs/html5-demos/503/audio/audio.mp3" type="audio/mp3">
+            <source src="https://actions.google.com/sounds/v1/ambiences/birthday_party.ogg" type="audio/ogg">
+        </audio>
+
+        <div class="timer" id="timer">Загрузка времени...</div>
+
+        <!-- Открытка -->
+        <div class="congrats-card">
+            <h3>С Юбилеем, родная!</h3>
+            <p>Сестренка, сегодня тебе 20 лет. Круглая, мощная дата. Новый этап, вход в по-настоящему взрослую и безумно интересную жизнь. Я знаю, что внутри сейчас может быть странное чувство — легкое волнение перед будущим, но помни одно: я всегда за твоей спиной.</p>
+            
+            <div class="highlight-action">
+                👁️ Посмотри на меня после того, как дочитаешь это!
+            </div>
+
+            <p>Я подготовил для тебя этот сюрприз и дарю тебе те деньги, что смог накопить за последнее время... хи-хи-хих! 💸 Знаю, сумма может и не заоблачная, но это от чистого сердца, всё что смог на данный момент. Прости за скромность!</p>
+            <p>Но я даю тебе слово брата: на следующий день рождения масштаб будет совершенно другим! А пока — крепкого здоровья, огненного счастья, уверенности в себе. Пусть все твои амбиции реализуются. С днём рождения, тигрица!</p>
+            
+            <!-- Механика: Удерживай чтобы открыть -->
+            <div class="gift-section">
+                <p style="margin-top: 0; color: #aaa; font-weight: 600; font-size: 0.9rem;">ЗАЖМИ И УДЕРЖИВАЙ КНОПКУ, ЧТОБЫ УЗНАТЬ БУДУЩЕЕ</p>
+                <button class="hold-btn" id="holdBtn">Удерживать 🔓</button>
+                <div class="gift-response" id="giftResponse">
+                    🎁 Твой персональный список желаний на следующий год официально ОТКРЫТ! Готовься, дальше будет только мощнее! 😎🔥
+                </div>
+            </div>
+        </div>
+
+        <!-- Стена пожеланий -->
+        <div class="form-box">
+            <h3 style="color: #ffafbd; margin-top: 0;">Оставить след в истории:</h3>
+            <form id="wishForm">
+                <input type="text" id="author" required placeholder="Твое имя / Позывной">
+                <textarea id="message" rows="3" required placeholder="Напиши что-то легендарное..."></textarea>
+                <button type="submit">Отправить в вечность 🚀</button>
+            </form>
+
+            <div class="wishes-list" id="wishesList" style="margin-top: 30px;">
+                <p style="color: #777;">Загружаем архивы...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // Эффект печатной машинки
+        const titleText = "С 20-летием, моя тигрица! 🐅";
+        let i = 0;
+        function typeWriter() {
+            if (i < titleText.length) {
+                document.getElementById("typewriter").innerHTML += titleText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        window.onload = typeWriter;
+
+        // Музыка
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('playMusicBtn');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (!isPlaying) {
+                music.play().then(() => {
+                    isPlaying = true;
+                    musicBtn.innerHTML = 'PAUSE ⏸';
+                    musicBtn.style.background = 'transparent';
+                    musicBtn.style.border = '2px solid #ff6b81';
+                    confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 }, colors: ['#ffafbd', '#ffc3a0', '#fff'] });
+                }).catch(err => alert("Нажми еще раз, браузер блокирует первый клик!"));
+            } else {
+                music.pause();
+                isPlaying = false;
+                musicBtn.innerHTML = 'PLAY ▶';
+                musicBtn.style.background = 'linear-gradient(135deg, #ff6b81, #ff4757)';
+                musicBtn.style.border = 'none';
+            }
+        }
+
+        // Инновационная кнопка подарка (Удерживай)
+        const holdBtn = document.getElementById('holdBtn');
+        let holdTimer;
+        let isGiftOpened = false;
+
+        const startHold = () => {
+            if(isGiftOpened) return;
+            holdBtn.classList.add('active');
+            holdBtn.innerText = 'Заряжаем... ⚡';
+            
+            // Если держит 1.5 секунды - открываем
+            holdTimer = setTimeout(() => {
+                isGiftOpened = true;
+                holdBtn.style.display = 'none';
+                const resp = document.getElementById('giftResponse');
+                resp.style.display = 'block';
+                
+                // Мега-взрыв конфетти
+                var duration = 3 * 1000;
+                var animationEnd = Date.now() + duration;
+                var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+                function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+                var interval = setInterval(function() {
+                    var timeLeft = animationEnd - Date.now();
+                    if (timeLeft <= 0) { return clearInterval(interval); }
+                    var particleCount = 50 * (timeLeft / duration);
+                    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+                }, 250);
+                
+            }, 1500);
+        };
+
+        const stopHold = () => {
+            if(!isGiftOpened) {
+                clearTimeout(holdTimer);
+                holdBtn.classList.remove('active');
+                holdBtn.innerText = 'Удерживать 🔓';
+            }
+        };
+
+        holdBtn.addEventListener('mousedown', startHold);
+        holdBtn.addEventListener('mouseup', stopHold);
+        holdBtn.addEventListener('mouseleave', stopHold);
+        holdBtn.addEventListener('touchstart', startHold);
+        holdBtn.addEventListener('touchend', stopHold);
+
+        // Таймер
+        function updateTimer() {
+            const targetDate = new Date('2026-10-15T00:00:00');
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('timer').innerHTML = '<span>🎉 УРА! ДЕНЬ РОЖДЕНИЯ НАСТАЛ! 🎉</span>';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('timer').innerHTML = `До юбилея: <span>${days}</span> дн. <span>${hours}</span> ч. <span>${minutes}</span> мин. ⏳`;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Бэкенд логика (Стена)
+        const form = document.getElementById('wishForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const author = document.getElementById('author').value;
+            const message = document.getElementById('message').value;
+
+            try {
+                const response = await fetch('/api/wishes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ author, message })
+                });
+                if (response.ok) {
+                    document.getElementById('message').value = '';
+                    confetti({ particleCount: 70, spread: 80, colors: ['#ffafbd', '#fff'] });
+                }
+            } catch (err) { console.error('Ошибка:', err); }
+        });
+
+        async function fetchWishes() {
+            try {
+                const response = await fetch('/api/wishes');
+                const result = await response.json();
+                if (result.success) renderWishes(result.data);
+            } catch (e) { console.error('Ошибка:', e); }
+        }
+
+        function renderWishes(wishes) {
+            const list = document.getElementById('wishesList');
+            if (wishes.length === 0) {
+                list.innerHTML = '<p style="color: #777;">Тут пока пусто. Будь первым, кто оставит след!</p>';
+                return;
+            }
+            list.innerHTML = wishes.map(w => `
+                <div class="wish-item">
+                    <b>${escapeHtml(w.author)}:</b><br>
+                    <span style="color: #ccc; font-size: 0.95rem;">${escapeHtml(w.message)}</span>
+                </div>
+            `).join('');
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+        }
+
+        const socket = io();
+        socket.on('new_wish', fetchWishes);
+        fetchWishes();
+    </script>
+</body>
+</html>
